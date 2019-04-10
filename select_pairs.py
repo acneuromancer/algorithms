@@ -11,7 +11,6 @@ def pair_sum(array, k):
            
     for i in range(len(array)):
         for j in range(i+1, len(array)):
-            counter += 1
             if array[i] + array[j] == k:
                 result.append((array[i], array[j]))
     
