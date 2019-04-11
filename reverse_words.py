@@ -14,6 +14,28 @@ def reverse(s):
 def reverse_2(s):
     return " ".join(reversed(s.split()))
 
+
+def reverse_3(s):
+    length = len(s)
+    words = []
+    chars_to_skip = [",", ";", "-", "?", "!", ".", " "]
+    i = 0
+    
+    while i < length:
+        if s[i] not in chars_to_skip:
+            j = i
+            word = ""
+            while j < length and s[j] not in chars_to_skip:
+                word += s[j]
+                j += 1
+            
+            words.insert(0, word)
+            i = j+1
+        else:
+            i += 1
+            
+    return words
     
 print(reverse("Hello there, how are you?"))
 print(reverse_2("Hello there, how are you?"))
+print(reverse_3("Hello  there ! ; ;;, how are you ?"))
