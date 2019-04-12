@@ -35,7 +35,13 @@ def reverse_3(s):
             i += 1
             
     return words
+
+
+def reverse_4(s):
+    return " ".join(s.split()[::-1])
+    
     
 print(reverse("Hello there, how are you?"))
 print(reverse_2("Hello there, how are you?"))
 print(reverse_3("Hello  there ! ; ;;, how are you ?"))
+print(reverse_4("Hello there, how are you?"))
