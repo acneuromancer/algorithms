@@ -85,6 +85,24 @@ public class LinkedList<T> implements Iterable<T> {
     size = 0;
   }
 
+  // Remove the first element at the head from the list
+  public T removeFirst() {
+    if (isEmpty()) {
+      throw new RuntimeException("Empty List");
+    }
+
+    T data = head.data;
+    head.data = null;
+    head = head.next;
+    --size;
+
+    if (isEmpty()) {
+      tail = null;
+    }
+
+    return data;
+  }
+
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
