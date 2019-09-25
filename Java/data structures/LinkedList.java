@@ -103,6 +103,30 @@ public class LinkedList<T> implements Iterable<T> {
     return data;
   }
 
+  // Remove the last element at the tail of the list
+  public T removeLast() {
+    if (isEmpty()) {
+      throw new RuntimeException("Empty List");
+    }
+
+    T data = tail.data;
+
+    Node<T> trav = head;
+    Node<T> prev = head;
+
+    while(trav.next != null) {
+      prev = trav;
+      trav = trav.next;
+    }
+
+    prev.next = trav = null;
+    tail.data = null;
+    tail = prev;
+    --size;
+
+    return data;
+  }
+
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
