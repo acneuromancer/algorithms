@@ -32,6 +32,22 @@ public class LinkedList<T> implements Iterable<T> {
     return size == 0;
   }
 
+  // Empty the whole list
+  public void clear() {
+    Node<T> trav = head;
+    Node<T> next = null;
+
+    while(trav.next != null) {
+      next = trav.next;
+      trav.data = null;
+      trav.next = null;
+      trav = next;
+    }
+
+    size = 0;
+    head = tail = trav = null;
+  }
+
   // Add a new node to the tail of the list
   public T addLast(T elem) {
     if (isEmpty()) {
@@ -69,6 +85,30 @@ public class LinkedList<T> implements Iterable<T> {
       throw new RuntimeException("Empty List");
     }
     return tail.data;
+  }
+
+  // Get an element with an arbitrary index from the list
+  public T get(int index) {
+    if (index > size || index < 0) {
+      throw new IndexOutOfBoundsException("The index is out of the boundaries of the list");
+    }
+
+    if (index == 0) {
+      return head.data;
+    }
+
+    if (index == size) {
+      return tail.data;
+    }
+
+    int count = 0;
+    Node<T> trav = head;
+    while(count != index) {
+      trav = trav.next;
+      ++count;
+    }
+
+    return trav.data;
   }
 
   // Empty the linked list
@@ -122,6 +162,61 @@ public class LinkedList<T> implements Iterable<T> {
     prev.next = trav = null;
     tail.data = null;
     tail = prev;
+    --size;
+
+    return data;
+  }
+
+  // Remove the last element at the tail of the list with another method
+  public T removeLast2() {
+    if (isEmpty()) {
+      throw new RuntimeException("Empty List");
+    }
+
+    T data = tail.data;
+
+    if (size == 1) {
+      tail.data = null;
+      head = tail = null;
+      --size;
+      return data;
+    }
+
+    Node<T> trav = head;
+
+    while((trav.next).next != null) {
+      trav = trav.next;
+    }
+
+    tail.data = null;
+    tail = trav;
+    trav.next = null;
+    --size;
+
+    return data;
+  }
+
+  // Remove an arbitrary element from the list
+  public T remove(T data) {
+    if (isEmpty()) {
+      throw new RuntimeException("Empty List");
+    }
+
+    Node<T> trav = head;
+    Node<T> prev = head;
+
+    while(!trav.data.equals(data) || trav == null) {
+      prev = trav;
+      trav = trav.next;
+    }
+
+    if (trav == null) {
+      return null;
+    }
+
+    prev.next = trav.next;
+    T dataSaved = trav.data;
+    trav = null;
     --size;
 
     return data;
